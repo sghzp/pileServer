@@ -81,7 +81,7 @@ public class Server {
              * 绑定端口并启动去接收进来的连接
              */
             //绑定端口
-            ChannelFuture future = bootstrap.bind(50005);
+            ChannelFuture future = bootstrap.bind(50005);  //服务器端口设定
 
             System.out.println("start");
             /**

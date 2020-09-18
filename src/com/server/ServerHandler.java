@@ -524,6 +524,29 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
                     ctx.channel().writeAndFlush("#okzhuangdatanotok," + divide_str1[1] + "," + divide_str[2] + "," + check_date + "*\r\n");
                 }
 
+                //更新上次在线时间
+                java.sql.Connection conn = null;
+                PreparedStatement ps = null;
+                String nowDataTime = simpleDateFormat.format(new Date());
+                String sql = "UPDATE tb_deviceinfo SET LastOnlineTime='"+nowDataTime+"' WHERE Num ='"+divide_str[2] +"';";//查询 通知sql语句
+                try {
+                    conn = JDBCTools.getConnection();
+                    ps = conn.prepareStatement(sql);
+                    ps.executeUpdate();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        ps.close();
+                        conn.close();
+                    } catch (SQLException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+
+                }
+
                 return null;
             }
             if (tablename.equals("tb_pileokrealtime")) {
@@ -844,6 +867,29 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
                 ctx.channel().writeAndFlush("#historyokzhuangdataok," + divide_str1[1] + "," + divide_str[2] + "," + check_date + "*\r\n");
             } else {
                 ctx.channel().writeAndFlush("#historyokzhuangdatanotok," + divide_str1[1] + "," + divide_str[2] + "," + check_date + "*\r\n");
+            }
+
+            //更新上次在线时间
+            java.sql.Connection conn = null;
+            PreparedStatement ps = null;
+            String nowDataTime = simpleDateFormat.format(new Date());
+            String sql = "UPDATE tb_deviceinfo SET LastOnlineTime='"+nowDataTime+"' WHERE Num ='"+divide_str[2] +"';";//查询 通知sql语句
+            try {
+                conn = JDBCTools.getConnection();
+                ps = conn.prepareStatement(sql);
+                ps.executeUpdate();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } finally {
+                try {
+                    ps.close();
+                    conn.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
             }
 
             return null;

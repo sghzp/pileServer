@@ -417,6 +417,29 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
             xunjianInfo.setTime(time);
             object[divide_str.length] = time;*/
 
+                //更新上次在线时间
+                java.sql.Connection conn = null;
+                PreparedStatement ps = null;
+                String nowDataTime = simpleDateFormat.format(new Date());
+                String sql = "UPDATE tb_deviceinfo SET LastOnlineTime='"+nowDataTime+"' WHERE Num ='"+divide_str[33] +"';";//查询 通知sql语句
+                try {
+                    conn = JDBCTools.getConnection();
+                    ps = conn.prepareStatement(sql);
+                    ps.executeUpdate();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        ps.close();
+                        conn.close();
+                    } catch (SQLException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+
+                }
+
 
                 pileRealtime.setAll(object);
                 boolean response = true;
@@ -528,7 +551,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
                 java.sql.Connection conn = null;
                 PreparedStatement ps = null;
                 String nowDataTime = simpleDateFormat.format(new Date());
-                String sql = "UPDATE tb_deviceinfo SET LastOnlineTime='"+nowDataTime+"' WHERE Num ='"+divide_str[2] +"';";//查询 通知sql语句
+                String sql = "UPDATE tb_deviceinfo SET LastOnlineTime='"+nowDataTime+"' WHERE Num ='"+divide_str[35] +"';";//查询 通知sql语句
                 try {
                     conn = JDBCTools.getConnection();
                     ps = conn.prepareStatement(sql);
@@ -540,6 +563,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
                     try {
                         ps.close();
                         conn.close();
+
                     } catch (SQLException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
@@ -638,6 +662,29 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
                     ctx.channel().writeAndFlush("#pileokrealtimedataok," + divide_str1[1] + "," + divide_str[2] + "," + check_date + "*\r\n");
                 } else {
                     ctx.channel().writeAndFlush("#pileokrealtimedatanotok," + divide_str1[1] + "," + divide_str[2] + "," + check_date + "*\r\n");
+                }
+
+                //更新上次在线时间
+                java.sql.Connection conn = null;
+                PreparedStatement ps = null;
+                String nowDataTime = simpleDateFormat.format(new Date());
+                String sql = "UPDATE tb_deviceinfo SET LastOnlineTime='"+nowDataTime+"' WHERE Num ='"+divide_str[33] +"';";//查询 通知sql语句
+                try {
+                    conn = JDBCTools.getConnection();
+                    ps = conn.prepareStatement(sql);
+                    ps.executeUpdate();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        ps.close();
+                        conn.close();
+                    } catch (SQLException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+
                 }
 
                 return null;
@@ -873,7 +920,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
             java.sql.Connection conn = null;
             PreparedStatement ps = null;
             String nowDataTime = simpleDateFormat.format(new Date());
-            String sql = "UPDATE tb_deviceinfo SET LastOnlineTime='"+nowDataTime+"' WHERE Num ='"+divide_str[2] +"';";//查询 通知sql语句
+            String sql = "UPDATE tb_deviceinfo SET LastOnlineTime='"+nowDataTime+"' WHERE Num ='"+divide_str[35] +"';";//查询 通知sql语句
             try {
                 conn = JDBCTools.getConnection();
                 ps = conn.prepareStatement(sql);
@@ -974,6 +1021,30 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
                     ctx.channel().writeAndFlush("#historyokrealtimedatanotok," + divide_str1[1] + ","  + divide_str[2]  + ","+ check_date + "*\r\n");
                 }
 
+                //更新上次在线时间
+                java.sql.Connection conn = null;
+                PreparedStatement ps = null;
+                String nowDataTime = simpleDateFormat.format(new Date());
+                String sql = "UPDATE tb_deviceinfo SET LastOnlineTime='"+nowDataTime+"' WHERE Num ='"+divide_str[33] +"';";//查询 通知sql语句
+                try {
+                    conn = JDBCTools.getConnection();
+                    ps = conn.prepareStatement(sql);
+                    ps.executeUpdate();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        ps.close();
+                        conn.close();
+                    } catch (SQLException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+
+                }
+
+
                 return null;
             /*增加记录完成回复#historydataok，当前设备时间，设备id，校验值*
                     增加记录失败回复#historydatanotok，当前设备时间，设备id，校验值**/
@@ -1065,7 +1136,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
                 java.sql.Connection conn = null;
                 PreparedStatement ps = null;
                 ResultSet rs = null;
-                String sql1 = "SELECT  * FROM tb_deviceinfo WHERE Num = '" + divide_str[0] + "';";//查询 通知sql语句，；
+                String sql1 = "SELECT  * FROM tb_deviceinfo WHERE Num = '" + divide_str[1] + "';";//查询 通知sql语句，；
                 try {
                     conn = JDBCTools.getConnection();
                     ps = conn.prepareStatement(sql1);
@@ -1086,6 +1157,29 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
                 } finally {
                     try {
                         rs.close();
+                        ps.close();
+                        conn.close();
+                    } catch (SQLException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+
+                }
+
+                //更新上次在线时间
+                conn = null;
+                ps = null;
+                String nowDataTime = simpleDateFormat.format(new Date());
+                String sql = "UPDATE tb_deviceinfo SET LastOnlineTime='"+nowDataTime+"' WHERE Num ='"+divide_str[1] +"';";//查询 通知sql语句
+                try {
+                    conn = JDBCTools.getConnection();
+                    ps = conn.prepareStatement(sql);
+                    ps.executeUpdate();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } finally {
+                    try {
                         ps.close();
                         conn.close();
                     } catch (SQLException e) {

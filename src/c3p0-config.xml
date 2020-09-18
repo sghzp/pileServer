@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+c3p0-config.xml必须位于类路径下面
+private static ComboPooledDataSource ds;
+static{
+    try {
+        ds = new ComboPooledDataSource("MySQL");
+    } catch (Exception e) {
+        throw new ExceptionInInitializerError(e);
+    }
+}
+-->
+
+<c3p0-config>
+    <!-- C3P0的缺省(默认)配置，
+    如果在代码中“ComboPooledDataSource ds = new ComboPooledDataSource();”这样写就表示使用的是C3P0的缺省(默认)配置信息来创建数据源
+    -->
+    <default-config>
+        <property name="driverClass">com.mysql.jdbc.Driver</property>
+        <property name="jdbcUrl">jdbc:mysql://118.190.134.156:3306/jhwayMonitor</property>
+        <property name="user">root</property>
+        <property name="password">dingyuanseu123456</property>
+
+        <!--每60秒检查所有连接池中的空闲连接。Default: 0 -->
+ 		<property name="idleConnectionTestPeriod">60</property>
+ 		<!--最大空闲时间,60秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 -->
+ 		<property name="maxIdleTime">60</property>
+        <property name="acquireIncrement">5</property>
+        <property name="initialPoolSize">10</property>
+        <property name="minPoolSize">5</property>
+        <property name="maxPoolSize">50</property>
+    </default-config>
+
+    <!--
+    C3P0的命名配置，
+    如果在代码中“ComboPooledDataSource ds = new ComboPooledDataSource("MySQL");”这样写就表示使用的是name是MySQL的配置信息来创建数据源
+    -->
+    <named-config name="MySQL">
+        <property name="driverClass">com.mysql.jdbc.Driver</property>
+        <property name="jdbcUrl">jdbc:mysql://118.190.134.156:3306/jhwayMonitor</property>
+        <property name="user">root</property>
+        <property name="password">dingyuanseu123456</property>
+
+         <!--每60秒检查所有连接池中的空闲连接。Default: 0 -->
+ 		<property name="idleConnectionTestPeriod">60</property>
+ 		<!--最大空闲时间,60秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 -->
+ 		<property name="maxIdleTime">60</property>
+        <property name="acquireIncrement">5</property>
+        <property name="initialPoolSize">10</property>
+        <property name="minPoolSize">5</property>
+        <property name="maxPoolSize">50</property>
+    </named-config>
+
+</c3p0-config>
